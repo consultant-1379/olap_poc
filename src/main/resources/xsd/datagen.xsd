@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.ericsson.com/dg"
+           xmlns:dg="http://www.ericsson.com/dg">
+
+  <xs:complexType name="data_typeType">
+    <xs:sequence>
+      <xs:element name="data-cardinality" type="xs:int" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="data-new-val" type="xs:int" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="supp-data-length" type="xs:int" minOccurs="0" maxOccurs="1" default="0"/>
+      <xs:element name="max-data-length" minOccurs="0" maxOccurs="1" type="xs:int"/>
+      <xs:element name="avg-data-length" minOccurs="0" maxOccurs="1" type="xs:int"/>
+      <xs:element name="scale" minOccurs="0" maxOccurs="1" type="xs:int" default="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="type"/>
+  </xs:complexType>
+
+  <xs:complexType name="columnType">
+    <xs:sequence>
+      <xs:element type="dg:data_typeType" name="data_type" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="required"/>
+    <xs:attribute type="xs:int" name="n_columns" default="1"/>
+    <xs:attribute type="xs:string" name="name_prefix" use="optional" default="col_"/>
+  </xs:complexType>
+
+  <xs:complexType name="tableType">
+    <xs:sequence>
+      <xs:element type="dg:columnType" name="column" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="required"/>
+    <xs:attribute type="xs:int" name="n_tables" use="optional" default="1"/>
+    <xs:attribute type="xs:string" name="name_prefix" use="optional" default=""/>
+  </xs:complexType>
+
+  <xs:complexType name="databaseType">
+    <xs:sequence>
+      <xs:element type="dg:tableType" name="table" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="database" type="dg:databaseType" xmlns:dg="http://www.ericsson.com/dg">
+    <xs:unique name="table_id">
+      <xs:selector xpath="dg:database/dg:table/dg:column"/>
+      <xs:field xpath="@id"/>
+    </xs:unique>
+  </xs:element>
+</xs:schema>

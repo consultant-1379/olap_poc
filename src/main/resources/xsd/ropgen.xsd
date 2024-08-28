@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.ericsson.com/rg"
+           xmlns:rg="http://www.ericsson.com/rg">
+
+  <xs:complexType name="rows_per_loadType">
+    <xs:attribute name="table_percent">
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="0"/>
+          <xs:maxInclusive value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="row_count">
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="loadIntervalType">
+    <xs:sequence>
+      <xs:element type="rg:tableDefType" name="table" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="tableDefType">
+    <xs:sequence>
+      <xs:element type="rg:rows_per_loadType" name="rows_per_load" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="type" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="data_spreadType">
+    <xs:sequence>
+      <xs:element type="rg:loadIntervalType" name="rop" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="data_spread" type="rg:data_spreadType" xmlns:rg="http://www.ericsson.com/rg"/>
+
+</xs:schema>

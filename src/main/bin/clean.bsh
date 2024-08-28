@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DG_GEN_BASE=/var/datagen
+
+for _i_ in {1..9} ; do
+	_path_=${DG_GEN_BASE}/fs_${_i_}/rop_files
+	if [ -d ${_path_} ] ; then
+		echo "Cleaning ${_path_}"
+		rm -rf ${DG_GEN_BASE}/fs_${_i_}/rop_files/*
+	fi
+done
+echo "Removing ROP info files"
+rm -rf ${DG_GEN_BASE}/rop-*.txt
+echo "Removing load time files"
+rm -rvf ${DG_GEN_BASE}/rop-*.txt_loadtimes.csv
+rm -rvf ${DG_GEN_BASE}/sample_data_dir/.state

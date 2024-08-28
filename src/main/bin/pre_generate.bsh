@@ -1,0 +1,68 @@
+#!/bin/bash
+
+CYGPATH=cygpath
+DIRNAME=dirname
+ECHO=echo
+UNAME=uname
+LS=ls
+
+_dir_=`${DIRNAME} $0`
+export SCRIPTHOME=`cd ${_dir_}/../ 2>/dev/null && pwd || ${ECHO} ${_dir_}`
+unset _dir_
+
+export CONF_DIR=${SCRIPTHOME}/conf
+export TMP_DIR=/home/datagen/
+
+if [ ! ${JAVA_HOME} ] ; then
+  JAVA=`which java 2>&1`
+  if [ $? -eq 0 ] ; then
+    ${ECHO} "\${JAVA_HOME} not set, defaulting to ${JAVA}"
+  else
+    ${ECHO} "\${JAVA_HOME} not set!"
+    exit 1
+  fi
+else
+  JAVA="${JAVA_HOME}/bin/java"
+fi
+MAINCLASS=com.ericsson.nms.dg.gen.DataSetGenerator
+PATH_SEP=":"
+if [[ `${UNAME}` == CYGWIN* ]] ; then
+	PATH_SEP=";"
+fi
+
+path()
+{
+  local _path_="$1"
+  if [[ `${UNAME}` == CYGWIN* ]] ; then
+    ${CYGPATH} -m "${_path_}"
+  else
+    ${ECHO} "${_path_}"
+  fi
+}
+
+CLASSPATH=`path ${SCRIPTHOME}/xsd`
+CLASSPATH=${CLASSPATH}"${PATH_SEP}"`path ${SCRIPTHOME}/conf`
+
+for _jar_ in `${LS} -1 ${SCRIPTHOME}/lib/*.jar` ; do
+  _jar_=`path ${_jar_}`
+  CLASSPATH=${CLASSPATH}"${PATH_SEP}${_jar_}"
+done
+
+DEBUG=""
+PROFILE=""
+
+_prog_args_=()
+for _arg_ in $* ; do
+  if [[ ${_arg_} == --debug ]] ; then
+    DEBUG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+  elif [[ ${_arg_} == --profile ]] ; then
+    PROFILE="-agentpath:/root/eeipca/yjp-2013-build-13046/bin/linux-x86-64/libyjpagent.so=port=5006"
+  else
+    _prog_args_=( ${_prog_args_[*]} "${_arg_}" )
+  fi
+done
+
+${JAVA} -cp ${CLASSPATH} ${DEBUG} ${PROFILE} ${MAINCLASS} ${_prog_args_[*]} 2>&1
+if [ $? -ne 0 ] ; then
+  exit 1
+fi

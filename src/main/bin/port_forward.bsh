@@ -1,0 +1,53 @@
+#!/bin/bash
+
+GETOPT=/usr/bin/getopt
+
+#iptables -t nat -A PREROUTING -p tcp --dport 6022 -j DNAT --to 192.168.1.5:22
+#iptables -A FORWARD -d 192.168.1.5 -p tcp --dport 6022 -j ACCEPT
+#iptables -t nat -A POSTROUTING -j MASQUERADE
+
+port_forward()
+{
+  local _localport_=$1
+  local _remoteport_=$2
+  local _remotehost_=$3
+
+  iptables -t nat -A PREROUTING -p tcp --dport ${_localport_} -j DNAT --to ${_remotehost_}:${_remoteport_}
+  iptables -A FORWARD -d ${_remotehost_} -p tcp --dport ${_localport_} -j ACCEPT
+  iptables -t nat -A POSTROUTING -j MASQUERADE
+  iptables -L -n
+}
+
+
+
+_CLI_ARGS_=$@
+_arg_list_=`${GETOPT} -o "a:l:r:" -n "$0" -- ${_CLI_ARGS_[*]}`
+if [ $? -ne 0 ] ; then
+  abort_script
+fi
+eval set -- "${_arg_list_}"
+
+while true ; do
+  case "$1" in
+    -a)
+      REMOTEADDRESS=$2
+      shift 2
+      ;;
+    -l)
+      LOCALPORT=$2
+      shift 2
+      ;;
+    -r)
+      REMOTEPORT=$2
+      shift 2
+      ;;
+    -h)
+      exit 3
+      ;;
+    --)
+      shift
+      break;;
+  esac
+done
+
+port_forward ${LOCALPORT} ${REMOTEPORT} ${REMOTEADDRESS}

@@ -1,0 +1,67 @@
+<rg:data_spread xmlns:rg="http://www.ericsson.com/rg">
+  <rg:rop id="1m">
+    <rg:table type="narrow">
+      <rg:rows_per_load table_percent="20" row_count="1000"/>
+      <rg:rows_per_load table_percent="50" row_count="20000"/>
+      <rg:rows_per_load table_percent="20" row_count="400000"/>
+      <rg:rows_per_load table_percent="10" row_count="2000000"/>
+    </rg:table>
+    <rg:table type="medium">
+      <rg:rows_per_load table_percent="20" row_count="200"/>
+      <rg:rows_per_load table_percent="50" row_count="4000"/>
+      <rg:rows_per_load table_percent="20" row_count="80000"/>
+      <rg:rows_per_load table_percent="10" row_count="400000"/>
+    </rg:table>
+    <rg:table type="wide">
+      <rg:rows_per_load table_percent="20" row_count="50"/>
+      <rg:rows_per_load table_percent="50" row_count="1000"/>
+      <rg:rows_per_load table_percent="20" row_count="20000"/>
+      <rg:rows_per_load table_percent="10" row_count="100000"/>
+    </rg:table>
+  </rg:rop>
+  <rg:rop id="5m">
+    <rg:table type="narrow">
+      <rg:rows_per_load table_percent="20" row_count="5000"/>
+      <rg:rows_per_load table_percent="50" row_count="100000"/>
+      <rg:rows_per_load table_percent="20" row_count="2000000"/>
+      <rg:rows_per_load table_percent="10" row_count="10000000"/>
+    </rg:table>
+    <rg:table type="medium">
+      <rg:rows_per_load table_percent="20" row_count="1000"/>
+      <rg:rows_per_load table_percent="50" row_count="20000"/>
+      <rg:rows_per_load table_percent="20" row_count="400000"/>
+      <rg:rows_per_load table_percent="10" row_count="2000000"/>
+    </rg:table>
+    <rg:table type="wide">
+      <rg:rows_per_load table_percent="20" row_count="250"/>
+      <rg:rows_per_load table_percent="50" row_count="5000"/>
+      <rg:rows_per_load table_percent="20" row_count="100000"/>
+      <rg:rows_per_load table_percent="10" row_count="500000"/>
+    </rg:table>
+  </rg:rop>
+  <rg:rop id="15m">
+    <rg:table type="narrow">
+      <rg:rows_per_load table_percent="20" row_count="15000"/>
+      <rg:rows_per_load table_percent="50" row_count="300000"/>
+      <rg:rows_per_load table_percent="20" row_count="6000000"/>
+      <rg:rows_per_load table_percent="10" row_count="30000000"/>
+    </rg:table>
+    <rg:table type="medium">
+      <rg:rows_per_load table_percent="20" row_count="3000"/>
+      <rg:rows_per_load table_percent="50" row_count="60000"/>
+      <rg:rows_per_load table_percent="20" row_count="1200000"/>
+      <rg:rows_per_load table_percent="10" row_count="6000000"/>
+    </rg:table>
+    <rg:table type="wide">
+      <rg:rows_per_load table_percent="20" row_count="750"/>
+      <rg:rows_per_load table_percent="50" row_count="15000"/>
+      <rg:rows_per_load table_percent="20" row_count="300000"/>
+      <rg:rows_per_load table_percent="10" row_count="1500000"/>
+    </rg:table>
+  </rg:rop>
+  <rg:rop id="bulk">
+    <rg:table type="bulk">
+      <rg:rows_per_load table_percent="100" row_count="10800000"/>
+    </rg:table>
+  </rg:rop>
+</rg:data_spread>

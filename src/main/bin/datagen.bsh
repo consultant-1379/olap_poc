@@ -1,0 +1,93 @@
+#!/bin/bash
+
+CYGPATH=cygpath
+DIRNAME=dirname
+ECHO=echo
+LS=ls
+NPROC=/usr/bin/nproc
+UNAME=uname
+
+_dir_=`${DIRNAME} $0`
+export SCRIPTHOME=`cd ${_dir_}/../ 2>/dev/null && pwd || ${ECHO} ${_dir_}`
+unset _dir_
+
+export CONF_DIR=${SCRIPTHOME}/conf
+export TMP_DIR=/home/datagen/
+HEAP_DUMP_DIR=/home/datagen/hprof/
+
+HEAP_MIN="-Xms1024M"
+HEAP_MAX="-Xmx64G"
+JMX_PORT=5004
+DEBUG_PORT=5005
+PROFILER_PORT=5006
+
+if [ ! ${JAVA_HOME} ] ; then
+  JAVA=`which java 2>&1`
+  if [ $? -eq 0 ] ; then
+    ${ECHO} "\${JAVA_HOME} not set, defaulting to ${JAVA}"
+  else
+    ${ECHO} "\${JAVA_HOME} not set!"
+    exit 1
+  fi
+else
+  JAVA="${JAVA_HOME}/bin/java"
+fi
+
+MAINCLASS=com.ericsson.nms.dg.gen.RopGenerator
+PATH_SEP=":"
+if [[ `${UNAME}` == CYGWIN* ]] ; then
+	PATH_SEP=";"
+fi
+
+path()
+{
+  local _path_="$1"
+  if [[ `${UNAME}` == CYGWIN* ]] ; then
+    ${CYGPATH} -m "${_path_}"
+  else
+    ${ECHO} "${_path_}"
+  fi
+}
+
+CLASSPATH=`path ${SCRIPTHOME}/xsd`
+CLASSPATH=${CLASSPATH}"${PATH_SEP}"`path ${SCRIPTHOME}/conf`
+for _jar_ in `${LS} -1 ${SCRIPTHOME}/lib/*.jar` ; do
+  _jar_=`path ${_jar_}`
+  CLASSPATH=${CLASSPATH}"${PATH_SEP}${_jar_}"
+done
+
+DEBUG=""
+PROFILE=""
+
+_prog_args_=()
+for _arg_ in $* ; do
+  if [[ ${_arg_} == --debug_s ]] ; then
+    DEBUG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${DEBUG_PORT}"
+  elif [[ ${_arg_} == --debug_n ]] ; then
+    DEBUG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${DEBUG_PORT}"
+  elif [[ ${_arg_} == --profile ]] ; then
+    PROFILE="-agentpath:/root/eeipca/jprofiler8/bin/linux-x64/libjprofilerti.so=port=${PROFILER_PORT}"
+  else
+    _prog_args_=( ${_prog_args_[*]} "${_arg_}" )
+  fi
+done
+
+MAX_THREADS=$((`${NPROC}` * 3))
+
+
+echo "Generating Load data ..."
+time ${JAVA} -Did=datagen -d64 -server ${HEAP_MIN} ${HEAP_MAX} -ea \
+  ${DEBUG} ${PROFILE} \
+  -Dmax.threads=${MAX_THREADS} \
+  -Dcom.sun.management.jmxremote.port=${JMX_PORT} \
+  -Dcom.sun.management.jmxremote.ssl=false \
+  -Dcom.sun.management.jmxremote.authenticate=false \
+  -XX:+UseG1GC -XX:MaxGCPauseMillis=1000 \
+  -Xloggc:${SCRIPTHOME}/bin/logs/gc.log -XX:+PrintGCDetails \
+  -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${HEAP_DUMP_DIR} \
+  -XX:+UseStringCache -XX:+OptimizeStringConcat -XX:-PrintCommandLineFlags \
+  -classpath "${CLASSPATH}" ${MAINCLASS} ${_prog_args_[*]} 2>&1
+if [ $? -ne 0 ] ; then
+  exit 1
+fi
+echo "Data generated."

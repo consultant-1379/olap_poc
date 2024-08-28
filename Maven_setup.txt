@@ -1,0 +1,11 @@
+Download and install maven (e.g. C:\tools\apache-maven-3.1.1)
+	Add an environment variable M2_HOME=C:\tools\apache-maven-3.1.1
+	Add ${M2_HOME}/bin to ${PATH}
+
+Run 
+	mvn install -Dmaven.repo.local=C:\Users\<userid>\.m2\repository
+		Ignore the 'no POM in this directory' error
+		
+	Copy maven_settings.xml to C:\Users\<userid>\.m2\settings.xml
+
+	

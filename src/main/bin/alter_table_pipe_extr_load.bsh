@@ -1,0 +1,128 @@
+#!/bin/bash 
+# ********************************************************************
+# Ericsson Radio Systems AB                                     SCRIPT
+# ********************************************************************
+#
+#
+# (c) Ericsson Radio Systems AB 2012 - All rights reserved.
+#
+# The copyright to the computer program(s) herein is the property
+# of Ericsson Radio Systems AB, Sweden. The programs may be used 
+# and/or copied only with the written permission from Ericsson Radio 
+# Systems AB or in accordance with the terms and conditions stipulated 
+# in the agreement/contract under which the program(s) have been 
+# supplied.
+#
+# ********************************************************************
+# Name    :
+# Date    : 
+# Revision: 
+# Purpose : 
+#			
+# Usage   : 
+#
+# ********************************************************************
+#
+# 	Command Section
+#
+# ********************************************************************
+#
+
+AWK=/usr/bin/awk
+BASENAME=/usr/bin/basename
+CAT=/usr/bin/cat
+CHMOD=/usr/bin/chmod
+CHOWN=/usr/bin/chown
+CP=/usr/bin/cp
+DATE=/usr/bin/date
+DIRNAME=/usr/bin/dirname
+ECHO=/usr/bin/echo
+EGREP=/usr/bin/egrep
+EXPR=/usr/bin/expr
+FIND=/usr/bin/find
+GETENT=/usr/bin/getent
+GEGREP=/usr/sfw/bin/gegrep
+GREP=/usr/bin/grep
+GTAR=/usr/sfw/bin/gtar
+GZCAT=/usr/bin/gzcat
+GZIP=/usr/bin/gzip
+HEAD=/usr/bin/head
+MYHOSTNAME=/usr/bin/hostname
+ID=/usr/bin/id
+INIT=/usr/sbin/init
+LN=/usr/bin/ln
+LS=/usr/bin/ls
+MKDIR=/usr/bin/mkdir
+MOUNT=/usr/sbin/mount
+MV=/usr/bin/mv
+NAWK=/usr/bin/nawk
+PGREP=/usr/bin/pgrep
+PWD=/usr/bin/pwd
+REBOOT=/usr/sbin/reboot
+RM=/usr/bin/rm
+SED=/usr/bin/sed
+SLEEP=/usr/bin/sleep
+SORT=/usr/bin/sort
+SU=/usr/bin/su
+SSH=/usr/bin/ssh
+SVCADM=/usr/sbin/svcadm
+SVCCFG=/usr/sbin/svccfg
+SVCS=/usr/bin/svcs
+TAIL=/usr/bin/tail
+TAR=/usr/sbin/tar
+TEE=/usr/bin/tee
+TOUCH=/usr/bin/touch
+WC=/usr/bin/wc
+MKFIFO=/usr/bin/mkfifo
+
+### Function: abort_script ###
+#
+#  abort function
+#
+# Arguments:
+#       none
+# Return Values:
+#       none
+abort_script()
+{
+if [ "$1" ]; then
+    _err_msg_=$1
+else
+    _err_msg_="Script aborted.......\n"    
+fi
+
+echo "$_err_msg_"  
+
+exit 1
+}
+
+
+# ********************************************************************
+#
+# 	Main body of program
+#
+# ********************************************************************
+#
+
+pipe_name=$1
+db_ip=$2
+db_name=$3 
+username=$4
+password=$5
+tablename=$6
+
+#Create a connection from the destination table/database to the pipe via DLP, stating the delimiters
+/opt/infobright/tools/distributed-load-processor/dataprocessor -I pipe -i ${pipe_name} -X -H ${db_ip} -D ${db_name} -T ${tablename} -L ${username} --password=\"${password}\" -v --data-format=txt_variable --fields-terminated-by=\"\\t\" --fields-enclosed-by\"\\\"\" --lines-terminated-by=\"\\n\" -r /tmp/rej_${tablename}.txt -c 0
+if [ $? -ne 0 ]
+then
+    _err_msg_="Error creating connection from DLP to pipe ith table target."
+    abort_script "${_err_msg_}"
+fi
+
+#Extract the data from the source table to the pipe as a sql script
+/usr/local/infobright/bin/mysql -h ${db_ip} -u ${username} --password=\"${password}\" --silent --skip-column-names -e "Select \* from ${db_name}.${tablename}" > ${pipe_name}
+if [ $? -ne 0 ]
+then
+    _err_msg_="Error reloading data into the new created table"
+    abort_script "${_err_msg_}"
+fi

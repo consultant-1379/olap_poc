@@ -1,0 +1,300 @@
+<dg:database xmlns:dg="http://www.ericsson.com/dg">
+    <!--1 or more repetitions:-->
+    <dg:table id="bulk" name_prefix="table" n_tables="1">
+        <!--1 or more repetitions:-->
+        <dg:column id="string1" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>10</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string2" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>100</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string3" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>500</dg:data-cardinality>
+                <dg:data-new-val>2</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string4" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>1000</dg:data-cardinality>
+                <dg:data-new-val>5</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int1" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>10</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int2" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>100</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int3" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>500</dg:data-cardinality>
+                <dg:data-new-val>2</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int4" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>1000</dg:data-cardinality>
+                <dg:data-new-val>5</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long1" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>10</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long2" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>100</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long3" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>500</dg:data-cardinality>
+                <dg:data-new-val>2</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long4" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>1000</dg:data-cardinality>
+                <dg:data-new-val>5</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string5" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>20000</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string6" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>1000000</dg:data-cardinality>
+                <dg:data-new-val>100</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string7" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>50000000</dg:data-cardinality>
+                <dg:data-new-val>3500</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="string8" n_columns="1">
+            <dg:data_type type="varchar">
+                <dg:data-cardinality>500000000</dg:data-cardinality>
+                <dg:data-new-val>35000</dg:data-new-val>
+                <dg:supp-data-length>128</dg:supp-data-length>
+                <dg:max-data-length>128</dg:max-data-length>
+                <dg:avg-data-length>25</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int5" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>20000</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int6" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>1000000</dg:data-cardinality>
+                <dg:data-new-val>100</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int7" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>50000000</dg:data-cardinality>
+                <dg:data-new-val>3500</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="int8" n_columns="1">
+            <dg:data_type type="int">
+                <dg:data-cardinality>500000000</dg:data-cardinality>
+                <dg:data-new-val>35000</dg:data-new-val>
+                <dg:supp-data-length>4</dg:supp-data-length>
+                <dg:max-data-length>4</dg:max-data-length>
+                <dg:avg-data-length>4</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long5" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>20000</dg:data-cardinality>
+                <dg:data-new-val>0</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long6" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>1000000</dg:data-cardinality>
+                <dg:data-new-val>100</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long7" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>50000000</dg:data-cardinality>
+                <dg:data-new-val>3500</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="long8" n_columns="1">
+            <dg:data_type type="long">
+                <dg:data-cardinality>500000000</dg:data-cardinality>
+                <dg:data-new-val>35000</dg:data-new-val>
+                <dg:supp-data-length>8</dg:supp-data-length>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="datetime1" n_columns="1">
+            <dg:data_type type="DATETIME">
+                <dg:data-cardinality>10000</dg:data-cardinality>
+                <dg:data-new-val>1</dg:data-new-val>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="datetime2" n_columns="1">
+            <dg:data_type type="DATETIME">
+                <dg:data-cardinality>1000000</dg:data-cardinality>
+                <dg:data-new-val>60</dg:data-new-val>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+        <dg:column id="datetime3" n_columns="1">
+            <dg:data_type type="DATETIME">
+                <dg:data-cardinality>600000000</dg:data-cardinality>
+                <dg:data-new-val>60000</dg:data-new-val>
+                <dg:max-data-length>8</dg:max-data-length>
+                <dg:avg-data-length>8</dg:avg-data-length>
+                <!--Optional:-->
+                <dg:scale></dg:scale>
+            </dg:data_type>
+        </dg:column>
+    </dg:table>
+</dg:database>
